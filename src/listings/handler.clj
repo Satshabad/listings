@@ -10,7 +10,7 @@
 
 (def db
   {:subprotocol "sqlite"
-   :subname     ":memory:"})
+   :subname     "db/database.db"})
 
 (defn create-db []
   (try (db-do-commands db
@@ -30,8 +30,6 @@
   (create-db)
   (doseq [listing (csv/parse-csv (slurp "listing-details.csv") :key :keyword)]
     (insert! db :listings listing)))
-
-(load-data)
 
 (defn listing->geojson
   [listing]
