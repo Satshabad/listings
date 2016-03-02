@@ -13,5 +13,4 @@
                         [csv-map "0.1.2"]
                         [org.clojure/tools.logging "0.3.1"]
                         [org.xerial/sqlite-jdbc "3.7.2"]
-                        [cheshire "5.5.0"]
-                        [ring-mock "0.1.5"]]}})
+                        [cheshire "5.5.0"]]}})

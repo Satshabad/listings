@@ -10,7 +10,7 @@
 
 (def db
   {:subprotocol "sqlite"
-   :subname     "db/database.db"})
+   :subname     ":memory"})
 
 (defn create-db []
   (try (db-do-commands db
@@ -19,8 +19,8 @@
                                          [:street :text]
                                          [:status :text]
                                          [:price :double]
-                                         [:bedrooms :double]
-                                         [:bathrooms :double]
+                                         [:bedrooms :double]; Maybe there's half a bedrooms or something
+                                         [:bathrooms :double] ; In case we have x.5 bathrooms
                                          [:sq_ft :double]
                                          [:lat :double]
                                          [:lng :double]))
@@ -30,6 +30,8 @@
   (create-db)
   (doseq [listing (csv/parse-csv (slurp "listing-details.csv") :key :keyword)]
     (insert! db :listings listing)))
+
+(load-data)
 
 (defn listing->geojson
   [listing]
