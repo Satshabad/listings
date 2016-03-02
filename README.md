@@ -10,5 +10,6 @@ If I were to spend more time on this I would
     - probably switch to a higher level sql library to not shoot myself in the foot.
     - do perf testing and see if I can do pagination faster.
     - write docs, maybe live docs with something like swagger.
+    - add docstrings
     - write unit tests
     - Add sq_foot and geographical filters

@@ -10,7 +10,7 @@
 
 (def db
   {:subprotocol "sqlite"
-   :subname     ":memory"})
+   :subname     ":memory:"})
 
 (defn create-db []
   (try (db-do-commands db
@@ -54,19 +54,19 @@
         max_bed (or max_bed Double/MAX_VALUE)
         min_bath (or min_bath 0)
         max_bath (or max_bath Double/MAX_VALUE)]
-    (query db (format "SELECT * from listings where
-                       price >= %s AND price <= %s
-                       AND bedrooms >= %s AND bedrooms <=  %s
-                       AND bathrooms >= %s AND bathrooms <= %s
-                       LIMIT %s, %s"
-                      min_price
-                      max_price
-                      min_bed
-                      max_bed
-                      min_bath
-                      max_bath
-                      offset
-                      limit))))
+    (query db ["SELECT * from listings where
+                    price >= ? AND price <= ?
+                AND bedrooms >= ? AND bedrooms <= ?
+                AND bathrooms >= ? AND bathrooms <= ?
+                LIMIT ?, ?"
+               min_price
+               max_price
+               min_bed
+               max_bed
+               min_bath
+               max_bath
+               offset
+               limit])))
 
 (defn parse-double
   [d]
